@@ -1,0 +1,52 @@
+#include <HCSR04.h>
+HCSR04 hc(?,?);//initialisation class HCSR04 (trig pin , echo pin)
+ int ledin = ?; // motor ซ้าย INPUT ledbuild_in
+ int ledexot = ?; // output external led
+ int ledexin = ?;// input external led
+
+
+void setup() {
+    Serial.begin(9600);
+   pinMode(ledin,INPUT);
+   pinMode(ledexin,INPUT);
+   pinMode(LED_BUILTIN,OUTPUT);// motor ซ้าย OUTPUT
+   pinMode(ledexot,OUTPUT);
+}
+
+void loop() {
+   //Serial.println(digitalRead(?));
+Serial.println( hc.dist() );
+   if(digitalRead(?)==0){
+    digitalWrite(LED_BUILTIN,HIGH);
+    digitalWrite(ledexot,LOW);
+    delay(100);
+    }
+     else if(digitalRead(ledexin)==LOW){
+    digitalWrite(LED_BUILTIN,LOW);
+    digitalWrite(ledexot,HIGH);
+   delay(100);
+   } 
+     else if(hc.dist()<=20){ digitalWrite(LED_BUILTIN,0);
+    digitalWrite(?,LOW);
+  
+    } 
+    else if ( hc.dist()>=40){ digitalWrite(LED_BUILTIN,1);
+    digitalWrite(?,HIGH);
+      delay(100);
+  
+    
+    } 
+    else if (hc.dist()<=40&& hc.dist()>=20){ digitalWrite(LED_BUILTIN,1);
+    digitalWrite(?,HIGH);
+      delay(1000);
+      digitalWrite(LED_BUILTIN,0);
+      digitalWrite(?,LOW);
+          delay(1000);}
+    
+   
+   
+    
+  else { digitalWrite(LED_BUILTIN,LOW);
+    digitalWrite(?,LOW);}
+  
+}
