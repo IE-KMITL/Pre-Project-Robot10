@@ -17,7 +17,7 @@ HCSR04 hc(A0,A1);//initialisation class HCSR04 (trig pin , echo pin)
     int detectGoal=A3; //sensor ตรวจสอบเส้นชัย (สมมุติเส้นสนามน้ำเงิน  note หากสีอื่นต้องมีการเทสค่า)
     int detectRight=A4;//sensor ตรวจสอบเส้นขวา
     int detectLeft=A5; // sensor ตรวจสอบเส้นซ้าย
-    int fieldvalue=0;
+    int fieldvalue=0; // filedvalue=0 คือ Sensor ตรวจจับสนาม ทั้ง 3 ด้าน (หน้า,ซ้าย,ขวา) ไม่เจอขอบสนาม
     int sensorVcolor; //ด้านหน้า
     int sensorRcolor; // ซ้าย
     int sensorLcolor; // ขวา
@@ -47,6 +47,10 @@ void loop() {
    
     testsw();
     testField(); // function ตรวจสอบ ขอบของสนามแข่งและเส้นชัย
+ //หมายเหตุ
+  // fieldvalue=1 ตรวจสอบสนาม เจอเส้นชัย
+    // fieldvalue=2 ตรวจสอบสนาม เจอขอบสนามด้านขวา
+      // fieldvalue=3 ตรวจสอบสนาม เจอขอบสนามด้านซ้าย
   
       
      //กลยุทธ์รุก
@@ -85,9 +89,9 @@ void loop() {
      sensorRcolor=analogRead(detectRight);
        sensorLcolor=analogRead(detectLeft);
    
-   if(sensorVcolor>=50&&sensorVcolor<=200){fieldvalue=1;}
-    else if (sensorRcolor>=50&&sensorRcolor<=200){fieldvalue=2;}
-      else if (sensorLcolor>=50&&sensorLcolor<=200){fieldvalue=3;}
+   if(sensorVcolor>=50&&sensorVcolor<=200){fieldvalue=1;} // fieldvalue=1 ตรวจสอบสนาม เจอเส้นชัย
+    else if (sensorRcolor>=50&&sensorRcolor<=200){fieldvalue=2;} // fieldvalue=2 ตรวจสอบสนาม เจอขอบสนามด้านขวา
+      else if (sensorLcolor>=50&&sensorLcolor<=200){fieldvalue=3;} // fieldvalue=3 ตรวจสอบสนาม เจอขอบสนามด้านซ้าย
    else {  fieldvalue=0;}
 
 
